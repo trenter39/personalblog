@@ -31,7 +31,7 @@ const __dirname = path.dirname(__filename);
 
 app.use(express.static(path.join(__dirname, 'frontend')));
 
-app.get('/admin', async (req, res) => {
+app.get('/admin', authMiddleware, async (req, res) => {
     try {
         const posts = (await fetchPosts()).map(post => ({
             ...post,
@@ -81,14 +81,14 @@ app.get('/home', async (req, res) => {
     }
 });
 
-app.get('/new', (req, res) => {
+app.get('/new', authMiddleware,(req, res) => {
     res.render('new', {
         title: 'Create Post',
         script: '<script src="/scripts/create.js"></script>',
     });
 });
 
-app.get('/update/:id', async (req, res) => {
+app.get('/update/:id', authMiddleware, async (req, res) => {
     try {
         const { id } = req.params;
         const post = await fetchPost(id);
