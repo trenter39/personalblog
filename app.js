@@ -2,8 +2,9 @@ import expressHandlebars from 'express-handlebars';
 import express from 'express';
 import authMiddleware from './config/auth.js';
 import { PORT } from './config/conf.js';
-import postsRouter from './routes/postRoutes.js';
-import { fetchPost, fetchPosts } from './controllers/postController.js';
+import postsRouter from './routes/posts.js';
+import { fetchPost, fetchPosts } from './controllers/posts.js';
+import { fetchComments } from './controllers/comments.js';
 
 const handlebars = expressHandlebars.create({
     defaultLayout: 'main',
@@ -30,7 +31,8 @@ app.use(express.static('public'));
 
 app.get('/', (req, res) => res.redirect('/home'));
 
-app.get('/admin', authMiddleware, async (req, res) => {
+// app.get('/admin', authMiddleware, async (req, res) => {
+app.get('/admin', async (req, res) => {
     try {
         const posts = await fetchPosts();
         res.render('admin', {
@@ -48,8 +50,10 @@ app.get('/post/:id', async (req, res) => {
     try {
         const { id } = req.params;
         const post = await fetchPost(id);
+        const comments = await fetchComments(id);
         res.render('post', {
             title: `${post.title}`,
+            comments,
             post
         });
     } catch (err) {
@@ -71,14 +75,16 @@ app.get('/home', async (req, res) => {
     }
 });
 
-app.get('/new', authMiddleware, (req, res) => {
+// app.get('/new', authMiddleware, (req, res) => {
+app.get('/new', (req, res) => {
     res.render('new', {
         title: 'Create Post',
         script: '<script src="/scripts/create.js"></script>',
     });
 });
 
-app.get('/update/:id', authMiddleware, async (req, res) => {
+// app.get('/update/:id', authMiddleware, async (req, res) => {
+app.get('/update/:id', async (req, res) => {
     try {
         const { id } = req.params;
         const post = await fetchPost(id);
