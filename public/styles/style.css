@@ -93,11 +93,48 @@ body {
     text-align: justify;
 }
 
+#commentsHeader {
+    font-size: 24px;
+    padding-bottom: 8px;
+}
+
+.commentHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.commentBlock {
+    margin-bottom: 24px;
+    padding: 16px;
+    border-radius: 8px;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+}
+
+.commentHeader h3 {
+    font-size: 16px;
+    color: #333;
+}
+
+.commentTime {
+    font-size: 13px;
+    color: #888;
+}
+
+.commentContent {
+    margin: 0;
+    font-size: 16px;
+    line-height: 22px;
+}
+
 .postTitleInput,
 .postDateInput,
 .postContentInput,
 .postCategoryInput,
-.postTagsInput {
+.postTagsInput,
+#commentInput {
     padding: 15px 20px;
     font-size: 18px;
     border: 1px solid #ccc;
@@ -110,9 +147,19 @@ body {
 .postDateInput:focus,
 .postContentInput:focus,
 .postCategoryInput:focus,
-.postTagsInput:focus {
+.postTagsInput:focus,
+#commentInput:focus {
     border-color: black;
     outline: none;
+}
+
+.postContentInput {
+    line-height: 1.6;
+}
+
+#commentInput {
+    width: 100%;
+    margin-bottom: 16px;
 }
 
 .input-block {
@@ -131,7 +178,7 @@ body {
 }
 
 .postContentInput {
-    resize: none;
+    resize: vertical;
     min-height: 200px;
 }
 

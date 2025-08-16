@@ -16,6 +16,12 @@ const handlebars = expressHandlebars.create({
         formatDate: function (dateString) {
             const options = { day: 'numeric', month: 'long', year: 'numeric' };
             return new Date(dateString).toLocaleDateString('en-US', options);
+        },
+        trimContent: function (content) {
+            return content.trim().replace(/\n/g, '<br>');
+        },
+        tagsFormat: function (tags) {
+            return tags.join(', ');
         }
     }
 });
