@@ -39,6 +39,21 @@ body {
     color: black;
 }
 
+#sortLabel {
+    font-size: 18px;
+}
+
+#sortSelect {
+    width: 50%;
+    padding: 10px;
+    font-size: 18px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fdfdfd;
+    margin-bottom: 20px;
+    transition: border-color 0.3s;
+}
+
 #container h1,
 #updateContainer h1,
 #createContainer h1,
@@ -129,6 +144,11 @@ body {
     line-height: 22px;
 }
 
+#noCommentsParagraph {
+    text-align: center;
+    font-size: 16px;
+}
+
 .postTitleInput,
 .postDateInput,
 .postContentInput,
@@ -148,7 +168,8 @@ body {
 .postContentInput:focus,
 .postCategoryInput:focus,
 .postTagsInput:focus,
-#commentInput:focus {
+#commentInput:focus,
+#sortSelect:focus {
     border-color: black;
     outline: none;
 }

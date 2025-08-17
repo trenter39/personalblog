@@ -17,6 +17,9 @@ const handlebars = expressHandlebars.create({
             const options = { day: 'numeric', month: 'long', year: 'numeric' };
             return new Date(dateString).toLocaleDateString('en-US', options);
         },
+        formatDateData: function(dateString) {
+            return new Date(dateString).toISOString().slice(0, 10);
+        },
         trimContent: function (content) {
             return content.trim().replace(/\n/g, '<br>');
         },
@@ -70,9 +73,10 @@ app.get('/post/:id', async (req, res) => {
 
 app.get('/home', async (req, res) => {
     try {
-        const posts = await fetchPosts();
+        const posts = await fetchPosts({mode: 'frontend'});
         res.render('home', {
             title: 'Home',
+            script: '<script src="/scripts/home.js"></script>',
             posts
         });
     } catch (err) {

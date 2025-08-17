@@ -1,9 +1,14 @@
 <div id="navRow">
     <h1>Personal Blog</h1>
 </div>
+<label for="sort" id="sortLabel">Sort by:</label>
+<select name="sort" id="sortSelect">
+    <option value="newest">Newest First</option>
+    <option value="oldest">Oldest First</option>
+</select>
 <div id="postList">
     {{#each posts}}
-    <div class="post">
+    <div class="post" data-date="{{formatDateData this.createdAt}}">
         <a href="/post/{{this.id}}" class="post-link">
             <h2 class="postHeading">{{this.title}}</h2>
             <div>

@@ -27,8 +27,13 @@ export async function getPost(req, res) {
     }
 }
 
-export async function fetchPosts() {
-    let sql = "select * from posts";
+export async function fetchPosts({ mode = "api"} = {}) {
+    let sql;
+    if(mode === "frontend"){
+        sql = "select * from posts order by createdAt desc";
+    } else {
+        sql = "select * from posts order by id asc";
+    }
     const [result] = await db.query(sql);
     return result.map(post => ({
         ...post,
